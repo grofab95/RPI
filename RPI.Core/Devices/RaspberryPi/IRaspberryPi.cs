@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using RPI.Core.Devices.RaspberryPi.Enums;
 
@@ -7,7 +6,7 @@ namespace RPI.Core.Devices.RaspberryPi;
 
 public interface IRaspberryPi
 {
-    Task Initialize(Dictionary<int, PinMode> pinsConfiguration);
+    Task Initialize();
 
     void Write(int pin, PinValue pinValue);
     PinValue Read(int pin);

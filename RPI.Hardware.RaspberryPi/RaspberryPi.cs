@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Threading.Tasks;
-using RPI.Core.Devices;
+using Microsoft.Extensions.Options;
 using RPI.Core.Devices.RaspberryPi;
 using RPI.Core.Devices.RaspberryPi.Enums;
 using RPI.Core.Extensions;
+using RPI.Hardware.RaspberryPi.Options;
 using PinMode = RPI.Core.Devices.RaspberryPi.Enums.PinMode;
 using PinValue = RPI.Core.Devices.RaspberryPi.Enums.PinValue;
 
@@ -15,30 +16,33 @@ public class RaspberryPi : IRaspberryPi, IDisposable
 {
     public event EventHandler<(int pin, PinChangeTypes changeType)> PinValueChanged;
 
+    private readonly RaspberryPiOption _options;
     private readonly GpioController _device;
     private readonly List<int> _registeredPinValueChangedEvents;
 
-    public RaspberryPi()
+    public RaspberryPi(IOptions<RaspberryPiOption> options)
     {
+        _options = options.Value;
         _device = new GpioController();
         _registeredPinValueChangedEvents = new();
     }
     
-    public Task Initialize(Dictionary<int, PinMode> pinsConfiguration)
+    public Task Initialize()
     {
-        foreach (var (pin, pinMode) in pinsConfiguration)
+        foreach (var (pin, pinMode) in _options.PinsConfiguration)
         {
-            _device.SetPinMode(pin, pinMode.ConvertTo<System.Device.Gpio.PinMode>());
+            var pinNumber = int.Parse(pin);
+            _device.SetPinMode(pinNumber, pinMode.ConvertTo<System.Device.Gpio.PinMode>());
             if (pinMode == PinMode.Output)
             {
                 continue;
             }
             
-            _device.RegisterCallbackForPinValueChangedEvent(pin, PinEventTypes.None, HandlePinChanged);     
-            _device.RegisterCallbackForPinValueChangedEvent(pin, PinEventTypes.Rising, HandlePinChanged);     
-            _device.RegisterCallbackForPinValueChangedEvent(pin, PinEventTypes.Rising, HandlePinChanged);   
+            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.None, HandlePinChanged);     
+            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising, HandlePinChanged);     
+            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising, HandlePinChanged);   
             
-            _registeredPinValueChangedEvents.Add(pin);
+            _registeredPinValueChangedEvents.Add(pinNumber);
         }
 
         return Task.CompletedTask;

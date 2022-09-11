@@ -10,7 +10,7 @@ public class FakeRaspberryPi : IRaspberryPi
 {
     public event EventHandler<(int pin, PinChangeTypes changeType)> PinValueChanged;
     
-    public async Task Initialize(Dictionary<int, PinMode> pinsConfiguration)
+    public async Task Initialize()
     {
         await Task.Delay(1000);
     }

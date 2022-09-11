@@ -1,13 +1,8 @@
 using RPI.Core.Extensions;
 using RPI.Hardware.RaspberryPi.Extensions;
-using RPI.Web;
 using RPI.Web.Extensions;
 
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    Args = args,
-    ContentRootPath = WebContentHelper.GetPathToWebContent()
-});
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRaspberryPi();
 builder.Services.AddCore();
