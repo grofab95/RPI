@@ -1,0 +1,56 @@
+﻿@page "/counter"
+@using RPI.Core.Devices.RaspberryPi.Actions.SetPinValue
+@using RPI.Core.Devices.RaspberryPi.Enums
+@using RPI.Core.Devices.RaspberryPi.Actions.GetPinValue
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @_currentCount</p>
+
+<p style="@(_pinValue == null ? "display: none" : "")">Pin Value: @GetPinIndicator(_pinValue)</p>
+
+<button class="btn btn-primary" @onclick="Test">Test</button>
+<button class="btn btn-secondary" @onclick="ReadPinValue">Read Pin Value</button>
+
+@code {
+    private int _currentCount = 0;
+    private PinValue? _pinValue;
+
+    private async Task Test()
+    {
+        try
+        {
+            var result = await Mediator.Send(new SetPinValueCommand(1, PinValue.High));
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+
+    private async Task ReadPinValue()
+    {
+        try
+        {
+            var result = await Mediator.Send(new GetPinValueQuery(2));
+            if (result.IsSuccess)
+            {
+                _pinValue = result.Value;
+                StateHasChanged();
+            }
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+
+    private RenderFragment GetPinIndicator(PinValue? pinValue)
+    {
+        return pinValue == PinValue.High
+            ? @<span class="text-success">@_pinValue</span>
+            : @<span class="text-danger">@_pinValue</span>;
+    }
+}
