@@ -2,11 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RPI.Hardware.RaspberryPi\RPI.Hardware.RaspberryPi.csproj" />
+      <ProjectReference Include="..\RPI.Web\RPI.Web.csproj" />
     </ItemGroup>
+
 </Project>
