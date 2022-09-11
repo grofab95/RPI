@@ -8,6 +8,8 @@ namespace RPI.Hardware.RaspberryPi;
 
 public class FakeRaspberryPi : IRaspberryPi
 {
+    public event EventHandler<(int pin, PinChangeTypes changeType)> PinValueChanged;
+    
     public async Task Initialize(Dictionary<int, PinMode> pinsConfiguration)
     {
         await Task.Delay(1000);
@@ -15,7 +17,7 @@ public class FakeRaspberryPi : IRaspberryPi
 
     public void Write(int pin, PinValue pinValue)
     {
-        
+        PinValueChanged?.Invoke(this, (pin, PinChangeTypes.Rising));
     }
 
     public PinValue Read(int pin)
@@ -25,6 +27,4 @@ public class FakeRaspberryPi : IRaspberryPi
 
         return values[random.Next(0, values.Length)];
     }
-
-    public event EventHandler<(int pin, PinChangeTypes changeType)> PinValueChanged;
 }

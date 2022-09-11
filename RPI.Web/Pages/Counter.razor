@@ -1,7 +1,6 @@
 ﻿@page "/counter"
-@using RPI.Core.Devices.RaspberryPi.Actions.SetPinValue
-@using RPI.Core.Devices.RaspberryPi.Enums
-@using RPI.Core.Devices.RaspberryPi.Actions.GetPinValue
+
+@implements IDisposable
 
 <PageTitle>Counter</PageTitle>
 
@@ -17,6 +16,16 @@
 @code {
     private int _currentCount = 0;
     private PinValue? _pinValue;
+
+    protected override void OnInitialized()
+    {
+        Courier.Subscribe<PinValueChangedEvent>(OnPinValueChanged);
+    }
+
+    private async Task OnPinValueChanged(PinValueChangedEvent obj)
+    {
+        
+    }
 
     private async Task Test()
     {
@@ -52,5 +61,10 @@
         return pinValue == PinValue.High
             ? @<span class="text-success">@_pinValue</span>
             : @<span class="text-danger">@_pinValue</span>;
+    }
+
+    public void Dispose()
+    {
+        Courier.UnSubscribe<PinValueChangedEvent>(OnPinValueChanged);
     }
 }
