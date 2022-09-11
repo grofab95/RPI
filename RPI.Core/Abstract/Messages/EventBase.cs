@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace RPI.Core.Abstract;
+namespace RPI.Core.Abstract.Messages;
 
 public abstract record MessageBase
 {

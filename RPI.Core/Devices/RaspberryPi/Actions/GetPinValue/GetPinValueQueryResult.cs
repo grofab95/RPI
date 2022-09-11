@@ -1,5 +1,5 @@
 ﻿using System;
-using RPI.Core.Abstract;
+using RPI.Core.Abstract.Messages;
 using RPI.Core.Devices.RaspberryPi.Enums;
 
 namespace RPI.Core.Devices.RaspberryPi.Actions.GetPinValue;

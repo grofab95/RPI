@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
-namespace RPI.Core.Abstract;
+namespace RPI.Core.Abstract.Messages;
 
 public interface IQueryHandler<in TQuery, TQueryResult> :
     IRequestHandler<TQuery, TQueryResult> where TQuery : IQuery<TQueryResult>

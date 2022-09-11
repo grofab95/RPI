@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RPI.Core.Abstract;
+namespace RPI.Core.Abstract.Messages;
 
 public interface IMessage
 {

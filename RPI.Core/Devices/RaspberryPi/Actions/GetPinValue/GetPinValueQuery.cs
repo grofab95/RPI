@@ -1,4 +1,4 @@
-﻿using RPI.Core.Abstract;
+﻿using RPI.Core.Abstract.Messages;
 
 namespace RPI.Core.Devices.RaspberryPi.Actions.GetPinValue;
 

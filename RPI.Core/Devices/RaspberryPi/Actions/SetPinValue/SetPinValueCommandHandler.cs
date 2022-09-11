@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using RPI.Core.Abstract;
+using RPI.Core.Abstract.Messages;
 
 namespace RPI.Core.Devices.RaspberryPi.Actions.SetPinValue;
 

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace RPI.Core.Abstract;
+namespace RPI.Core.Abstract.Messages;
 
 // public interface ICommand : IMessage, IRequest
 // {
