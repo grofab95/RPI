@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using RPI.Core.Devices.RaspberryPi;
 using RPI.Core.Devices.RaspberryPi.Enums;
-using RPI.Core.Extensions;
+using RPI.Hardware.RaspberryPi.Extensions;
 using RPI.Hardware.RaspberryPi.Options;
 using PinMode = RPI.Core.Devices.RaspberryPi.Enums.PinMode;
 using PinValue = RPI.Core.Devices.RaspberryPi.Enums.PinValue;
@@ -32,16 +32,16 @@ public class RaspberryPi : IRaspberryPi, IDisposable
         foreach (var (pin, pinMode) in _options.PinsConfiguration)
         {
             var pinNumber = int.Parse(pin);
-            _device.SetPinMode(pinNumber, pinMode.ConvertTo<System.Device.Gpio.PinMode>());
+            _device.OpenPin(pinNumber, pinMode.ToPinMode());
+            
             if (pinMode == PinMode.Output)
             {
                 continue;
             }
+
+            const PinEventTypes eventTypes = PinEventTypes.Falling | PinEventTypes.Rising | PinEventTypes.None;
             
-            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.None, HandlePinChanged);     
-            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising, HandlePinChanged);     
-            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising, HandlePinChanged);   
-            
+            _device.RegisterCallbackForPinValueChangedEvent(pinNumber, eventTypes, HandlePinChanged);     
             _registeredPinValueChangedEvents.Add(pinNumber);
         }
 
@@ -50,13 +50,13 @@ public class RaspberryPi : IRaspberryPi, IDisposable
 
     private void HandlePinChanged(object sender, PinValueChangedEventArgs args)
     {
-        var changeType = args.ChangeType.ConvertTo<PinChangeTypes>();
+        var changeType = args.ChangeType.ToPinChangeTypes();
         PinValueChanged?.Invoke(this, (args.PinNumber, changeType));
     }
 
     public void Write(int pin, PinValue pinValue)
     {
-        _device.Write(pin, pinValue.ConvertTo<System.Device.Gpio.PinValue>());
+        _device.Write(pin, pinValue.ToPinValue());
     }
 
     public PinValue Read(int pin)

@@ -7,15 +7,20 @@
 <h1>Counter</h1>
 
 <p role="status">Current count: @_currentCount</p>
-
 <p style="@(_pinValue == null ? "display: none" : "")">Pin Value: @GetPinIndicator(_pinValue)</p>
 
 <button class="btn btn-primary" @onclick="Test">Test</button>
 <button class="btn btn-secondary" @onclick="ReadPinValue">Read Pin Value</button>
 
+<hr />
+
+<h2>@_status</h2>
+
 @code {
     private int _currentCount = 0;
     private PinValue? _pinValue;
+    private string _status;
+    bool _isOn;
 
     protected override void OnInitialized()
     {
@@ -24,18 +29,24 @@
 
     private async Task OnPinValueChanged(PinValueChangedEvent obj)
     {
-        
+        await InvokeAsync(() =>
+        {
+            _status = $"Pin {obj.Pin} Changed: {obj.ChangeType}";
+            StateHasChanged();
+        });
+
     }
 
     private async Task Test()
     {
         try
         {
-            var result = await Mediator.Send(new SetPinValueCommand(1, PinValue.High));
+            var result = await Mediator.Send(new SetPinValueCommand(4, _isOn ? PinValue.Low : PinValue.High));
+            _isOn = !_isOn;
         }
         catch (Exception e)
         {
-            
+            Console.WriteLine($"Test Error: {e}");
         }
     }
 
@@ -43,7 +54,7 @@
     {
         try
         {
-            var result = await Mediator.Send(new GetPinValueQuery(2));
+            var result = await Mediator.Send(new GetPinValueQuery(17));
             if (result.IsSuccess)
             {
                 _pinValue = result.Value;
@@ -52,7 +63,7 @@
         }
         catch (Exception e)
         {
-            
+            Console.WriteLine($"ReadPinValue Error: {e}");
         }
     }
 

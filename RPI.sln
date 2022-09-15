@@ -1,34 +1,61 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPI.Hardware.RaspberryPi", "RPI.Hardware.RaspberryPi\RPI.Hardware.RaspberryPi.csproj", "{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPI.Hardware.RaspberryPi", "RPI.Hardware.RaspberryPi\RPI.Hardware.RaspberryPi.csproj", "{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPI.Core", "RPI.Core\RPI.Core.csproj", "{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPI.Core", "RPI.Core\RPI.Core.csproj", "{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPI.Web", "RPI.Web\RPI.Web.csproj", "{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPI.Web", "RPI.Web\RPI.Web.csproj", "{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPI", "RPI\RPI.csproj", "{E6372670-68EA-40B8-B55F-4FF33FFE2A15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPI", "RPI\RPI.csproj", "{E6372670-68EA-40B8-B55F-4FF33FFE2A15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM32 = Debug|ARM32
 		Release|Any CPU = Release|Any CPU
+		Release|ARM32 = Release|ARM32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Debug|ARM32.Build.0 = Debug|Any CPU
 		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{916E2CB6-9C93-46AE-A4A2-7C85F7CEBD85}.Release|ARM32.Build.0 = Release|Any CPU
 		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Debug|ARM32.Build.0 = Debug|Any CPU
 		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{F7D0DBD1-A024-402D-AEA7-F4FF902924CD}.Release|ARM32.Build.0 = Release|Any CPU
 		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Debug|ARM32.Build.0 = Debug|Any CPU
 		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{E691E6B7-D41C-4DA8-AF7C-36D5317A8069}.Release|ARM32.Build.0 = Release|Any CPU
 		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Debug|ARM32.ActiveCfg = Debug|ARM32
+		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Debug|ARM32.Build.0 = Debug|ARM32
 		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Release|ARM32.ActiveCfg = Release|ARM32
+		{E6372670-68EA-40B8-B55F-4FF33FFE2A15}.Release|ARM32.Build.0 = Release|ARM32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB6AD97F-D760-49D4-8976-69B650E763D2}
 	EndGlobalSection
 EndGlobal
