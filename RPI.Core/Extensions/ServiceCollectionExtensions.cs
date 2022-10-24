@@ -11,6 +11,8 @@ public static class ServiceCollectionExtensions
 {
     public static void AddCore(this IServiceCollection services)
     {
+        services.AddSignalR();
+        services.AddSingleton<SignalRClient>();
         services.AddMediatR(typeof(ServiceCollectionExtensions));
         services.AddCourier(typeof(ServiceCollectionExtensions).Assembly);
         services.AddSingleton<IEventsDispatcherMarker, RaspberryPiEventsDispatcher>();

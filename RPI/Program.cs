@@ -4,7 +4,7 @@ using RPI.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://192.168.1.40:5000");
+builder.WebHost.UseUrls("http://localhost:5120");
 
 builder.Services.AddRaspberryPi();
 builder.Services.AddCore();
@@ -12,5 +12,6 @@ builder.Services.AddBlazor();
 
 var app = builder.Build();
 
+app.ConfigureCore();
 app.ConfigureBlazor();
 app.Run();

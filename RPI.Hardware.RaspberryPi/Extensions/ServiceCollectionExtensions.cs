@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         
         if (OperatingSystem.IsWindows())
         {
-            services.AddSingleton<IRaspberryPi, RaspberryPi>();
+            services.AddSingleton<IRaspberryPi, FakeRaspberryPi>();
         }
         else
         {
