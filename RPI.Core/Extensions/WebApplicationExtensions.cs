@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 using RPI.Core.Devices.RaspberryPi;
 using RPI.Core.Devices.RaspberryPi.Enums;
 using RPI.Core.SignalR;
@@ -15,7 +16,7 @@ public static class WebApplicationExtensions
         app.UseEndpoints(endpoint =>
         {
             endpoint.MapHub<RpiHub>("/rpi-hub");
-            endpoint.MapPost("switch-led", (EmptyDto _, IRaspberryPi raspberryPi) =>
+            endpoint.MapPost("switch-led", (EmptyDto _, IRaspberryPi raspberryPi, ILogger<RaspberryPiEventsDispatcher> logger) =>
             {
                 try
                 {
@@ -26,7 +27,7 @@ public static class WebApplicationExtensions
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    logger.LogError(e, "Endpoint switch-led error");
                 }
             });
         });

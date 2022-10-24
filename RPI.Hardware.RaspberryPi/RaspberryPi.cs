@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RPI.Core.Devices.RaspberryPi;
 using RPI.Core.Devices.RaspberryPi.Enums;
@@ -16,12 +17,14 @@ public class RaspberryPi : IRaspberryPi, IDisposable
 {
     public event EventHandler<(int pin, PinChangeTypes changeType)> PinValueChanged;
 
+    private readonly ILogger<RaspberryPi> _logger;
     private readonly RaspberryPiOption _options;
     private readonly GpioController _device;
     private readonly List<int> _registeredPinValueChangedEvents;
 
-    public RaspberryPi(IOptions<RaspberryPiOption> options)
+    public RaspberryPi(IOptions<RaspberryPiOption> options, ILogger<RaspberryPi> logger)
     {
+        _logger = logger;
         _options = options.Value;
         _device = new GpioController();
         _registeredPinValueChangedEvents = new();
@@ -50,23 +53,31 @@ public class RaspberryPi : IRaspberryPi, IDisposable
 
     private void HandlePinChanged(object sender, PinValueChangedEventArgs args)
     {
+        _logger.LogInformation("HandlePinChanged | Data={@Data}", args);
+        
         var changeType = args.ChangeType.ToPinChangeTypes();
         PinValueChanged?.Invoke(this, (args.PinNumber, changeType));
     }
 
     public void Write(int pin, PinValue pinValue)
     {
+        _logger.LogInformation("Write | Pin={Pin}, Value={Value}", pin, pinValue);
+        
         _device.Write(pin, pinValue.ToPinValue());
     }
 
     public PinValue Read(int pin)
     {
         var pinValue = _device.Read(pin);
+        
+        _logger.LogInformation("Read | Pin={Pin}, Value={Value}", pin, pinValue);
+        
         return Enum.Parse<PinValue>(pinValue.ToString());
     }
 
     public void Dispose()
     {
+        _logger.LogInformation("Dispose");
         _registeredPinValueChangedEvents.ForEach(pin => _device.UnregisterCallbackForPinValueChangedEvent(pin, HandlePinChanged));
         _device?.Dispose();
     }
